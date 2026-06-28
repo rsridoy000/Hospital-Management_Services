@@ -1,0 +1,366 @@
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    height: 100vh;
+    overflow: hidden;
+    background: #030712;
+}
+
+.sidebar {
+    background: #080a14;
+    padding: 45px 30px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(6, 182, 212, 0.1);
+    z-index: 100;
+}
+
+.main-stage {
+    overflow-y: auto;
+    padding: 50px 6%;
+    scroll-behavior: smooth;
+    background: radial-gradient(circle at top right, rgba(6, 182, 212, 0.05), transparent);
+}
+
+h1, h2, h3 { color: var(--text-main); transition: color 0.3s; }
+
+/* Theme Toggle Button Style */
+.theme-toggle {
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-main);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.theme-toggle:hover { transform: scale(1.05); border-color: var(--primary-blue); }
+
+body.white-mode .theme-toggle { background: #e2e8f0; border-color: #cbd5e1; color: #0f172a; }
+
+.role-indicator {
+    background: rgba(6, 182, 212, 0.15);
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #22d3ee;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    display: inline-block;
+    margin-bottom: 40px;
+    border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+/* Sidebar Navigation Fix - BIGGER & CLEANER */
+.sidebar-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+    padding: 22px 28px !important;
+    border-radius: 20px !important;
+    color: #94a3b8 !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    margin-bottom: 18px !important;
+    font-weight: 700 !important;
+    font-size: 19px !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    width: 100%;
+}
+
+.sidebar-item:hover {
+    background: rgba(34, 211, 238, 0.08) !important;
+    color: #22d3ee !important;
+    transform: translateX(12px);
+}
+
+.sidebar-item.active {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(6, 182, 212, 0.05)) !important;
+    color: #22d3ee !important;
+    border-right: 5px solid #06b6d4 !important;
+    font-weight: 900 !important;
+    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.1);
+}
+
+.stat-card {
+    padding: 14px 22px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    border: none;
+    background: linear-gradient(135deg, #22d3ee, #06b6d4) !important;
+    border-radius: 16px;
+    box-shadow: 0 3px 10px rgba(6, 182, 212, 0.12);
+}
+
+.stat-val {
+    font-size: 26px;
+    font-weight: 900;
+    color: #000000 !important;
+    text-shadow: none;
+    line-height: 1;
+}
+
+.stat-label {
+    color: #0f172a;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    white-space: nowrap;
+}
+
+/* Transparent Glass Background for Data Areas - NEW INDIGO TINT */
+#main-panel .glass-card {
+    background: rgba(17, 24, 39, 0.7) !important;
+    backdrop-filter: blur(30px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    box-shadow: 0 25px 80px -20px rgba(0, 0, 0, 0.6) !important;
+}
+
+td {
+    padding: 35px 30px !important;
+    background: rgba(255, 255, 255, 0.015) !important;
+    color: #e2e8f0 !important;
+    font-size: 17px !important;
+    font-weight: 500 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+}
+
+th {
+    padding: 20px 25px !important;
+    font-size: 15px !important;
+    color: #22d3ee !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+}
+
+.modal-content {
+    background: #020617 !important;
+    border: 1px solid rgba(6, 182, 212, 0.3) !important;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+/* More distance in grids */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+    gap: 20px;
+}
+
+.section-header h1 {
+    font-size: 52px !important;
+}
+
+/* Pharmacy Search Styles */
+.search-box {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 20px 28px;
+    font-size: 16px;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(30, 41, 59, 0.5);
+    color: white;
+}
+
+/* ULTRA MODAL FIX */
+.modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.9) !important;
+    backdrop-filter: blur(15px) !important;
+    z-index: 99999 !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.modal-content {
+    background: #080a14 !important;
+    padding: 50px !important;
+    border-radius: 30px !important;
+    width: 90% !important;
+    max-width: 750px !important;
+    max-height: 85vh !important;
+    overflow-y: auto !important;
+    position: relative !important;
+    border: 2px solid rgba(34, 211, 238, 0.4) !important;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 1) !important;
+    color: #ffffff !important;
+}
+
+.close-btn {
+    position: absolute !important;
+    top: 25px !important;
+    right: 30px !important;
+    font-size: 40px !important;
+    cursor: pointer !important;
+    color: #fbbf24 !important;
+    /* Bright Yellow for X */
+    line-height: 1 !important;
+    transition: 0.3s !important;
+    z-index: 100000 !important;
+}
+
+.close-btn:hover {
+    color: #f87171 !important;
+    transform: rotate(90deg);
+}
+
+.modal-content h2 {
+    color: #22d3ee !important;
+    font-size: 32px !important;
+    margin-bottom: 25px !important;
+}
+
+.modal-content p,
+.modal-content div {
+    color: #f1f5f9 !important;
+    font-size: 18px !important;
+}
+
+.medicine-card {
+    padding: 22px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.in-stock-label {
+    color: #34d399 !important;
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.guide-result {
+    background: rgba(6, 182, 212, 0.05);
+    padding: 30px;
+    border-radius: 24px;
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    margin-top: 25px;
+    color: #e2e8f0;
+}
+
+/* Dashboard White Mode overrides */
+body.white-mode .dashboard-layout {
+    background: var(--background) !important;
+}
+body.white-mode .sidebar {
+    background: #ffffff !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+body.white-mode .sidebar .logo {
+    color: #0f172a !important;
+}
+body.white-mode .sidebar-item {
+    color: #475569 !important;
+}
+body.white-mode .sidebar-item:hover {
+    background: rgba(4, 120, 87, 0.08) !important;
+    color: var(--primary-blue) !important;
+}
+body.white-mode .sidebar-item.active {
+    background: linear-gradient(135deg, rgba(4, 120, 87, 0.15), rgba(4, 120, 87, 0.05)) !important;
+    color: var(--primary-blue) !important;
+    border-right: 5px solid var(--primary-blue) !important;
+}
+body.white-mode .main-stage {
+    background: radial-gradient(circle at top right, rgba(4, 120, 87, 0.05), transparent) !important;
+}
+body.white-mode #main-panel .glass-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06) !important;
+}
+body.white-mode td {
+    background: rgba(0, 0, 0, 0.01) !important;
+    color: #0f172a !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
+}
+body.white-mode th {
+    color: var(--primary-blue) !important;
+}
+body.white-mode .modal-content {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #0f172a !important;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15) !important;
+}
+body.white-mode .modal-content h2 {
+    color: var(--primary-blue) !important;
+}
+body.white-mode .modal-content p,
+body.white-mode .modal-content div {
+    color: #475569 !important;
+}
+body.white-mode .medicine-card {
+    background: rgba(0, 0, 0, 0.02) !important;
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+body.white-mode .guide-result {
+    background: rgba(4, 120, 87, 0.03) !important;
+    border: 1px solid rgba(4, 120, 87, 0.1) !important;
+    color: #475569 !important;
+}
+body.white-mode .guide-result h4 {
+    color: #0f172a !important;
+}
+body.white-mode .guide-result p {
+    color: #475569 !important;
+}
+body.white-mode .search-box input {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    color: #0f172a !important;
+}
+body.white-mode .search-box input::placeholder {
+    color: #94a3b8 !important;
+}
+/* Doctor Profile - White Mode */
+body.white-mode #dp_saveBtn {
+    background: linear-gradient(135deg, #06b6d4, #0891b2) !important;
+    color: #ffffff !important;
+}
+body.white-mode #panel-content input,
+body.white-mode #panel-content select,
+body.white-mode #panel-content textarea {
+    background: #f8fafc !important;
+    border: 1px solid rgba(0,0,0,0.12) !important;
+    color: #0f172a !important;
+}
+body.white-mode #panel-content input::placeholder {
+    color: #94a3b8 !important;
+}
+body.white-mode #panel-content > div > div:last-child {
+    background: #ffffff !important;
+    border: 1px solid rgba(0,0,0,0.08) !important;
+}

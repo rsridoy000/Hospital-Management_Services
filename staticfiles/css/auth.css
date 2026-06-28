@@ -1,0 +1,139 @@
+/* Authentication Pages (Login/Register) Styles */
+body.auth-page { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    min-height: 100vh; 
+    margin: 0;
+    padding: 20px;
+    background: #020617; 
+}
+
+.auth-card { 
+    width: 100%;
+    max-width: 550px; 
+    padding: 50px; 
+    background: rgba(15, 23, 42, 0.8) !important;
+    border: 1px solid rgba(251, 191, 36, 0.1) !important;
+    border-radius: 30px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25) !important;
+}
+
+.auth-card.login-card {
+    max-width: 420px;
+}
+
+.auth-header h2 { 
+    font-size: 32px; 
+    font-weight: 800; 
+    color: #ffffff; 
+    margin-top: 10px; 
+}
+
+.login-card .auth-header h2 {
+    font-size: 28px;
+}
+
+.auth-header p { 
+    color: #64748b; 
+    font-size: 14px; 
+    margin-top: 5px; 
+}
+
+.auth-card .logo span { 
+    color: #fbbf24 !important; 
+    text-shadow: none; 
+}
+
+.auth-card .form-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+}
+
+.auth-card .form-group { 
+    margin-bottom: 25px; 
+}
+
+.auth-card .form-group label { 
+    display: block; 
+    margin-bottom: 10px; 
+    font-size: 12px; 
+    font-weight: 700; 
+    color: #64748b; 
+    text-transform: uppercase; 
+    letter-spacing: 1.5px; 
+}
+
+.auth-card input, .auth-card select { 
+    width: 100%;
+    background: rgba(2, 6, 23, 0.5) !important; 
+    border: 1px solid rgba(255, 255, 255, 0.08) !important; 
+    color: #f8fafc !important; 
+    border-radius: 14px !important;
+    padding: 16px !important;
+    transition: all 0.3s !important;
+    box-sizing: border-box;
+}
+
+.auth-card input:focus, .auth-card select:focus { 
+    border-color: #fbbf24 !important; 
+    box-shadow: 0 0 15px rgba(251, 191, 36, 0.2) !important;
+    outline: none;
+    background: rgba(2, 6, 23, 0.9) !important;
+}
+
+.auth-card .btn-primary { 
+    background: linear-gradient(135deg, #fbbf24, #d97706) !important; 
+    color: #000 !important; 
+    font-weight: 900 !important;
+    font-size: 16px !important;
+    letter-spacing: 0.5px;
+    padding: 16px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 20px rgba(251, 191, 36, 0.2) !important;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.auth-card .btn-primary:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 15px 30px rgba(251, 191, 36, 0.4) !important; 
+}
+
+.auth-footer { 
+    text-align: center; 
+    margin-top: 30px; 
+    color: #64748b; 
+    font-size: 14px; 
+}
+
+.auth-footer a { 
+    color: #fbbf24; 
+    font-weight: 700; 
+    text-decoration: none; 
+}
+
+.error-msg {
+    background: rgba(248, 113, 113, 0.1);
+    border: 1px solid rgba(248, 113, 113, 0.3);
+    color: #f87171;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: none;
+    text-align: center;
+}
+
+#patient-fields { 
+    border-top: 1px solid rgba(255, 255, 255, 0.05); 
+    padding-top: 25px; 
+    margin-top: 10px; 
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
