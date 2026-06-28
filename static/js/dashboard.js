@@ -593,10 +593,126 @@ async function loadRecepPats() {
 // --- PATIENT ---
 async function loadPatHome() {
     const [p, a, b] = await Promise.all([fx('/api/accounts/profile/'), fx('/api/appointments/'), fx('/api/billing/')]);
-    document.getElementById('greeting').innerText = `Hello, ${p.first_name}`;
-    renderStats([{ l: 'Active Appointments', v: a.results.length }, { l: 'Unpaid Dues', v: '৳' + b.results.filter(x => x.payment_status === 'UNPAID').reduce((acc, x) => acc + parseFloat(x.amount), 0) }, { l: 'Medical History', v: a.results.filter(x => x.status === 'COMPLETED').length }]);
-    renderGrid('My Recent Visits', ['Doctor', 'Date', 'Status'], a.results.slice(0, 5).map(x => ['Dr. ' + x.doctor_name, new Date(x.appointment_date).toLocaleDateString(), x.status]));
+    document.getElementById('greeting').innerText = `Hello, ${p.first_name || 'Patient'}`;
+    document.getElementById('panel-title').innerText = 'My Health Center';
+    document.getElementById('panel-actions').innerHTML = '';
+
+    // Stats bar
+    renderStats([
+        { l: 'Active Appointments', v: a.results.length },
+        { l: 'Unpaid Dues', v: '৳' + b.results.filter(x => x.payment_status === 'UNPAID').reduce((acc, x) => acc + parseFloat(x.amount), 0) },
+        { l: 'Medical History', v: a.results.filter(x => x.status === 'COMPLETED').length }
+    ]);
+
+    // Beautiful clinical slider
+    const sliderHtml = `
+        <div class="medical-slider-container panel-animate" style="margin-bottom: 30px; position: relative; overflow: hidden; border-radius: 12px; height: 160px; background: linear-gradient(135deg, #0284c7, #0f766e); color: white; display: flex; align-items: center; padding: 25px 35px 25px 25px; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.15);">
+            <div class="slides-wrapper" style="width: 100%;">
+                <div class="medical-slide" style="display: block;">
+                    <div style="display: flex; align-items: flex-start; gap: 15px;">
+                        <span style="font-size: 32px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">🌟</span>
+                        <div>
+                            <h3 style="font-size: 16px; font-weight: 700; color: white; margin: 0 0 5px 0;">Weekly Tip: Stay Hydrated</h3>
+                            <p style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4; margin: 0;">Drinking 8-10 glasses of water daily boosts immunity, helps digestion, and maintains healthy skin. Keep a bottle handy!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="medical-slide" style="display: none;">
+                    <div style="display: flex; align-items: flex-start; gap: 15px;">
+                        <span style="font-size: 32px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">🩺</span>
+                        <div>
+                            <h3 style="font-size: 16px; font-weight: 700; color: white; margin: 0 0 5px 0;">Annual Health Check-Up</h3>
+                            <p style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4; margin: 0;">Early detection is the best cure. Consult our experts today to schedule your screening tests and routine checks.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="medical-slide" style="display: none;">
+                    <div style="display: flex; align-items: flex-start; gap: 15px;">
+                        <span style="font-size: 32px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">🍎</span>
+                        <div>
+                            <h3 style="font-size: 16px; font-weight: 700; color: white; margin: 0 0 5px 0;">Healthy Diet, Healthy Heart</h3>
+                            <p style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4; margin: 0;">Reduce salt and refined sugar intake. Add more leafy greens, fresh fruits, and whole grains to your daily meals.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="medical-slide" style="display: none;">
+                    <div style="display: flex; align-items: flex-start; gap: 15px;">
+                        <span style="font-size: 32px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">🚶</span>
+                        <div>
+                            <h3 style="font-size: 16px; font-weight: 700; color: white; margin: 0 0 5px 0;">Keep Moving Daily</h3>
+                            <p style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.4; margin: 0;">A simple 30-minute brisk walk every day reduces the risk of heart disease, improves mental health, and strengthens bones.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-dots" style="position: absolute; bottom: 15px; right: 20px; display: flex; gap: 6px;">
+                <span class="dot" style="width: 8px; height: 8px; border-radius: 50%; background: white; cursor: pointer; opacity: 1;"></span>
+                <span class="dot" style="width: 8px; height: 8px; border-radius: 50%; background: white; cursor: pointer; opacity: 0.4;"></span>
+                <span class="dot" style="width: 8px; height: 8px; border-radius: 50%; background: white; cursor: pointer; opacity: 0.4;"></span>
+                <span class="dot" style="width: 8px; height: 8px; border-radius: 50%; background: white; cursor: pointer; opacity: 0.4;"></span>
+            </div>
+        </div>
+    `;
+
+    const recentVisitsRows = a.results.slice(0, 5).map(x => `
+        <tr>
+            <td>Dr. ${x.doctor_name}</td>
+            <td>${new Date(x.appointment_date).toLocaleDateString()}</td>
+            <td><span class="badge ${x.status === 'COMPLETED' ? 'badge-success' : x.status === 'PENDING' ? 'badge-warning' : 'badge-danger'}">${x.status}</span></td>
+        </tr>
+    `).join('') || `<tr><td colspan="3" style="text-align:center; color:var(--text-muted); padding: 15px;">No recent visits found.</td></tr>`;
+
+    const recentVisitsTable = `
+        <h3 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; margin-top: 15px;">📋 My Recent Visits</h3>
+        <table class="panel-animate">
+            <thead>
+                <tr>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${recentVisitsRows}
+            </tbody>
+        </table>
+    `;
+
+    document.getElementById('panel-content').innerHTML = sliderHtml + recentVisitsTable;
+
+    // Start auto slider
+    initMedicalSlider();
 }
+
+let sliderInterval = null;
+function initMedicalSlider() {
+    if (sliderInterval) clearInterval(sliderInterval);
+    const slides = document.querySelectorAll('.medical-slide');
+    const dots = document.querySelectorAll('.slider-dots .dot');
+    if (!slides.length) return;
+
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.style.display = (i === index) ? 'block' : 'none';
+        });
+        dots.forEach((dot, i) => {
+            dot.style.opacity = (i === index) ? '1' : '0.4';
+        });
+        currentSlide = index;
+    }
+
+    dots.forEach((dot, i) => {
+        dot.onclick = () => showSlide(i);
+    });
+
+    sliderInterval = setInterval(() => {
+        let nextSlide = (currentSlide + 1) % slides.length;
+        showSlide(nextSlide);
+    }, 5000);
+}
+
 
 async function loadPatDocs() {
     document.getElementById('panel-title').innerText = 'Find a Specialist';
