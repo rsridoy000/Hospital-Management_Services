@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Hospital Management | Modern Hospital Management{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/index.css">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content animate">
+        <h1>Bridging Health & <span>Technology</span></h1>
+        <p>Experience the next generation of healthcare management. Secure, efficient, and patient-centric.</p>
+        <div class="hero-btns">
+            <a href="/register/" class="btn btn-primary">Get Started</a>
+            <a href="#services" class="btn btn-outline" style="margin-left: 15px;">Our Services</a>
+        </div>
+    </div>
+    <div class="hero-image animate" style="animation-delay: 0.2s">
+        <!-- Image removed due to broken link -->
+    </div>
+</section>
+
+<section id="services" class="feature-grid">
+    <div class="feature-card glass-card animate" style="animation-delay: 0.3s">
+        <div class="feature-icon">📁</div>
+        <h3>Patient Records</h3>
+        <p>Comprehensive digital history and medical documentation at your fingertips.</p>
+    </div>
+    <div class="feature-card glass-card animate" style="animation-delay: 0.4s">
+        <div class="feature-icon">📅</div>
+        <h3>Appointment Desk</h3>
+        <p>Efficient booking engine for clinical visits and specialized consultations.</p>
+    </div>
+    <div class="feature-card glass-card animate" style="animation-delay: 0.5s">
+        <div class="feature-icon">🧾</div>
+        <h3>Financial Hub</h3>
+        <p>Automated invoicing and secure tracking of all hospital transactions.</p>
+    </div>
+    <div class="feature-card glass-card animate" style="animation-delay: 0.6s">
+        <div class="feature-icon">💊</div>
+        <h3>Pharmacy Inventory</h3>
+        <p>Manage medicine stocks and prescriptions with automatic updates.</p>
+    </div>
+    <div class="feature-card glass-card animate" style="animation-delay: 0.7s">
+        <div class="feature-icon">👩‍⚕️</div>
+        <h3>Doctor Directory</h3>
+        <p>Connect with specialists and check availability in real-time.</p>
+    </div>
+    <div class="feature-card glass-card animate" style="animation-delay: 0.8s">
+        <div class="feature-icon">🏥</div>
+        <h3>Ward Management</h3>
+        <p>Oversee hospital departments and resource allocation efficiently.</p>
+    </div>
+</section>
+
+<!-- Staff Access Verification Modal -->
+<div id="staffModal" class="modal-overlay">
+    <div class="modal-card">
+        <div class="modal-title">Staff Verification</div>
+        <div class="modal-subtitle">Please enter your 6-digit staff authorization code to access the login portal.</div>
+        <form id="staffForm" onsubmit="submitStaffCode(event)" autocomplete="off">
+            <div class="modal-input-group">
+                <label>Staff Access Code</label>
+                <input type="password" id="staffCode" class="modal-input" maxlength="6" placeholder="******" required>
+            </div>
+            <div id="staffError" class="modal-error">Invalid Staff Code</div>
+            <div class="modal-btns">
+                <button type="button" class="modal-btn modal-btn-secondary" onclick="closeStaffModal()">Cancel</button>
+                <button type="submit" class="modal-btn modal-btn-primary">Verify Code</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer style="padding: 60px 6%; background: #020617; color: white; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
+    <p style="opacity: 0.8; font-size: 14px;">&copy; 2026 Hospital Management System. | <a href="#" onclick="openStaffModal(event)" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">Staff Login</a></p>
+</footer>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/index.js"></script>
+{% endblock %}

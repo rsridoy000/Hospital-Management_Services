@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Our Doctors | Hospital Management</title>
+    <link rel="stylesheet" href="/static/css/base.css">
+    <style>
+        .container { padding: 120px 6% 60px; }
+        .doc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .doc-card { padding: 30px; text-align: center; }
+        .doc-card img { width: 100px; border-radius: 50%; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Hospital <span>Management</span></div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/doctors/">Doctors</a></li>
+            <li><a href="/appointments/">Appointments</a></li>
+            <li><a href="/dashboard/">Dashboard</a></li>
+        </ul>
+        <div class="nav-btns">
+            <div class="theme-toggle-mini" onclick="toggleTheme()" id="theme-icon">🌙</div>
+        </div>
+    </nav>
+    <div class="container text-center">
+        <h1 style="margin-bottom: 50px;">Meet Our Specialists</h1>
+        <div class="doc-grid" id="doctorGrid">
+            <!-- Loaded via JS -->
+            <p>Loading specialists...</p>
+        </div>
+    </div>
+    <script>
+        fetch('/api/doctors/').then(r => r.json()).then(docs => {
+            const grid = document.getElementById('doctorGrid');
+            grid.innerHTML = '';
+            docs.results.forEach(d => {
+                grid.innerHTML += `
+                    <div class="doc-card glass-card animate">
+                        <img src="https://ui-avatars.com/api/?name=${d.user_details.last_name}&background=3b82f6&color=fff">
+                        <h3>Dr. ${d.user_details.first_name} ${d.user_details.last_name}</h3>
+                        <p style="color: var(--primary-blue); font-weight: 600;">${d.specialization}</p>
+                        <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);">${d.department_name}</p>
+                        <a href="/dashboard/" class="btn btn-primary btn-sm" style="margin-top:20px;">Book Appointment</a>
+                    </div>
+                `;
+            });
+        });
+
+        // Theme management
+        function toggleTheme() {
+            const b = document.body;
+            b.classList.toggle('white-mode');
+            const isWhite = b.classList.contains('white-mode');
+            document.getElementById('theme-icon').innerText = isWhite ? '☀️' : '🌙';
+            localStorage.setItem('theme', isWhite ? 'white' : 'dark');
+        }
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'white') {
+            document.body.classList.add('white-mode');
+            document.getElementById('theme-icon').innerText = '☀️';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>My Appointments | Hospital Management</title>
+    <link rel="stylesheet" href="/static/css/base.css">
+    <style> .container { padding: 120px 6% 60px; } </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Hospital <span>Management</span></div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/doctors/">Doctors</a></li>
+            <li><a href="/appointments/">Appointments</a></li>
+            <li><a href="/dashboard/">Dashboard</a></li>
+        </ul>
+        <div class="nav-btns">
+            <div class="theme-toggle-mini" onclick="toggleTheme()" id="theme-icon">🌙</div>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Appointment Records</h2>
+        <div class="glass-card" style="margin-top: 30px; padding: 20px; overflow-x: auto;">
+            <table style="width: 100%;">
+                <thead>
+                    <tr style="text-align: left;"><th style="padding: 15px;">Doctor</th><th style="padding: 15px;">Date</th><th style="padding: 15px;">Status</th></tr>
+                </thead>
+                <tbody id="apptBody"><tr><td colspan="3" style="padding: 20px;">Loading your record...</td></tr></tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        const token = localStorage.getItem('access');
+        if(!token) window.location.href = '/login/';
+        fetch('/api/appointments/', { headers: {'Authorization': `Bearer ${token}`} }).then(r => r.json()).then(data => {
+            const body = document.getElementById('apptBody');
+            body.innerHTML = '';
+            data.results.forEach(a => {
+                body.innerHTML += `<tr><td style="padding: 15px;">${a.doctor_name}</td><td style="padding: 15px;">${new Date(a.appointment_date).toLocaleString()}</td><td style="padding: 15px;">${a.status}</td></tr>`;
+            });
+        });
+
+        // Theme management
+        function toggleTheme() {
+            const b = document.body;
+            b.classList.toggle('white-mode');
+            const isWhite = b.classList.contains('white-mode');
+            document.getElementById('theme-icon').innerText = isWhite ? '☀️' : '🌙';
+            localStorage.setItem('theme', isWhite ? 'white' : 'dark');
+        }
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'white') {
+            document.body.classList.add('white-mode');
+            document.getElementById('theme-icon').innerText = '☀️';
+        }
+    </script>
+</body>
+</html>

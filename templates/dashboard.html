@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | Hospital Management Premium</title>
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="logo" style="color:white; margin-bottom:50px;">Hospital <span>Management</span></div>
+            <div class="role-indicator" id="role-display">ROLE</div>
+            <nav id="sidebar-nav"></nav>
+            <div style="margin-top:auto;">
+                <a href="/logout" class="sidebar-item" style="color:#f87171 !important; border: 1px solid rgba(248, 113, 113, 0.2) !important; background: rgba(248, 113, 113, 0.05) !important;">
+                    🚪 Logout Session
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-stage">
+            <header class="section-header">
+                <div>
+                    <h1 id="greeting" style="font-size:36px; letter-spacing:-1px;">Welcome back</h1>
+                    <p id="sub-greeting" style="color:var(--text-muted);">Monitor your healthcare activities</p>
+                </div>
+                <div id="header-actions" style="display:flex; align-items:center; gap:20px;">
+                    <div class="theme-toggle" onclick="toggleTheme()">
+                        <span id="theme-icon">🌙</span> <span id="theme-text">Dark Mode</span>
+                    </div>
+                </div>
+            </header>
+
+            <div id="stats-container" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:16px; margin-bottom:30px;">
+            </div>
+
+            <div id="main-panel" class="panel-animate">
+                <div class="glass-card" style="padding:40px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
+                        <h2 id="panel-title" style="font-size:24px;">Overview</h2>
+                        <div id="panel-actions"></div>
+                    </div>
+                    <div id="panel-content">
+                        <!-- Skeleton loading simulator -->
+                        <div style="background:#f1f5f9; height:200px; border-radius:16px; width:100%;"
+                            class="animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="mainModal" class="modal">
+        <div class="modal-content"><span class="close-btn" onclick="closeM()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+
+</html>

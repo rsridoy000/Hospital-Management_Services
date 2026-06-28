@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hospital Management{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/base.css">
+    {% block extra_css %}{% endblock %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% block navbar %}
+    <nav class="navbar">
+        <div class="logo">Hospital <span>Management</span></div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/api/docs/swagger/">API Documentation</a></li>
+        </ul>
+        <div class="nav-btns">
+            <!-- This is a generic navbar, you might want to handle auth state here with JS or Django tags if needed -->
+            <a href="/login/" class="btn btn-outline">Sign In</a>
+            <a href="/register/" class="btn btn-primary">Create Account</a>
+            <div class="theme-toggle-mini" onclick="toggleTheme()" id="theme-icon">🌙</div>
+        </div>
+    </nav>
+    {% endblock %}
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    {% block footer %}
+    {% endblock %}
+
+    <script>
+        function toggleTheme() {
+            const b = document.body;
+            b.classList.toggle('white-mode');
+            const isWhite = b.classList.contains('white-mode');
+            document.getElementById('theme-icon').innerText = isWhite ? '☀️' : '🌙';
+            localStorage.setItem('theme', isWhite ? 'white' : 'dark');
+        }
+        // Load saved theme
+        if(localStorage.getItem('theme') === 'white') {
+            document.body.classList.add('white-mode');
+            const icon = document.getElementById('theme-icon');
+            if (icon) icon.innerText = '☀️';
+        }
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
