@@ -12,13 +12,8 @@
   ],
   "routes": [
     {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "hospital_management/wsgi.py"
     }
-  ],
-  "buildCommand": "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+  ]
 }
