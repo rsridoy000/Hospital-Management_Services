@@ -1,4 +1,4 @@
-/* Authentication Pages (Login/Register) Styles */
+/* Authentication Pages (Login/Register) Styles with Clinical Medical Vibe */
 body.auth-page { 
     display: flex; 
     align-items: center; 
@@ -6,17 +6,17 @@ body.auth-page {
     min-height: 100vh; 
     margin: 0;
     padding: 20px;
-    background: #020617; 
+    background: #0b0f19; 
 }
 
 .auth-card { 
     width: 100%;
-    max-width: 550px; 
-    padding: 50px; 
-    background: rgba(15, 23, 42, 0.8) !important;
-    border: 1px solid rgba(251, 191, 36, 0.1) !important;
-    border-radius: 30px;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25) !important;
+    max-width: 500px; 
+    padding: 40px; 
+    background: rgba(15, 23, 42, 0.9) !important;
+    border: 1px solid rgba(2, 132, 199, 0.15) !important;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3) !important;
 }
 
 .auth-card.login-card {
@@ -24,116 +24,188 @@ body.auth-page {
 }
 
 .auth-header h2 { 
-    font-size: 32px; 
-    font-weight: 800; 
+    font-size: 26px; 
+    font-weight: 700; 
     color: #ffffff; 
-    margin-top: 10px; 
+    margin-top: 8px; 
 }
 
 .login-card .auth-header h2 {
-    font-size: 28px;
+    font-size: 24px;
 }
 
 .auth-header p { 
-    color: #64748b; 
-    font-size: 14px; 
-    margin-top: 5px; 
+    color: #94a3b8; 
+    font-size: 13px; 
+    margin-top: 4px; 
 }
 
 .auth-card .logo span { 
-    color: #fbbf24 !important; 
+    color: var(--primary-blue) !important; 
     text-shadow: none; 
 }
 
 .auth-card .form-grid { 
     display: grid; 
     grid-template-columns: 1fr 1fr; 
-    gap: 20px; 
+    gap: 16px; 
 }
 
 .auth-card .form-group { 
-    margin-bottom: 25px; 
+    margin-bottom: 18px; 
 }
 
 .auth-card .form-group label { 
     display: block; 
-    margin-bottom: 10px; 
-    font-size: 12px; 
-    font-weight: 700; 
-    color: #64748b; 
+    margin-bottom: 8px; 
+    font-size: 11px; 
+    font-weight: 600; 
+    color: #94a3b8; 
     text-transform: uppercase; 
-    letter-spacing: 1.5px; 
+    letter-spacing: 1px; 
 }
 
 .auth-card input, .auth-card select { 
     width: 100%;
-    background: rgba(2, 6, 23, 0.5) !important; 
+    background: rgba(2, 6, 23, 0.6) !important; 
     border: 1px solid rgba(255, 255, 255, 0.08) !important; 
     color: #f8fafc !important; 
-    border-radius: 14px !important;
-    padding: 16px !important;
-    transition: all 0.3s !important;
+    border-radius: 8px !important;
+    padding: 11px 14px !important;
+    transition: all 0.2s !important;
     box-sizing: border-box;
+    font-size: 14px !important;
 }
 
 .auth-card input:focus, .auth-card select:focus { 
-    border-color: #fbbf24 !important; 
-    box-shadow: 0 0 15px rgba(251, 191, 36, 0.2) !important;
+    border-color: var(--primary-blue) !important; 
+    box-shadow: 0 0 10px rgba(2, 132, 199, 0.25) !important;
     outline: none;
-    background: rgba(2, 6, 23, 0.9) !important;
+    background: rgba(2, 6, 23, 0.8) !important;
 }
 
 .auth-card .btn-primary { 
-    background: linear-gradient(135deg, #fbbf24, #d97706) !important; 
-    color: #000 !important; 
-    font-weight: 900 !important;
-    font-size: 16px !important;
+    background: linear-gradient(135deg, var(--primary-blue), #0369a1) !important; 
+    color: #ffffff !important; 
+    font-weight: 600 !important;
+    font-size: 14px !important;
     letter-spacing: 0.5px;
-    padding: 16px !important;
-    border-radius: 16px !important;
-    box-shadow: 0 10px 20px rgba(251, 191, 36, 0.2) !important;
+    padding: 12px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2) !important;
     border: none;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.2s;
+    width: 100%;
 }
 
 .auth-card .btn-primary:hover { 
-    transform: translateY(-3px); 
-    box-shadow: 0 15px 30px rgba(251, 191, 36, 0.4) !important; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35) !important; 
 }
 
 .auth-footer { 
     text-align: center; 
-    margin-top: 30px; 
-    color: #64748b; 
-    font-size: 14px; 
+    margin-top: 24px; 
+    color: #94a3b8; 
+    font-size: 13px; 
 }
 
 .auth-footer a { 
-    color: #fbbf24; 
-    font-weight: 700; 
+    color: var(--primary-blue); 
+    font-weight: 600; 
     text-decoration: none; 
 }
 
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
 .error-msg {
-    background: rgba(248, 113, 113, 0.1);
-    border: 1px solid rgba(248, 113, 113, 0.3);
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
     color: #f87171;
-    padding: 14px 18px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 20px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 16px;
     display: none;
     text-align: center;
 }
 
 #patient-fields { 
     border-top: 1px solid rgba(255, 255, 255, 0.05); 
-    padding-top: 25px; 
+    padding-top: 18px; 
     margin-top: 10px; 
 }
 
 @keyframes spin {
     to { transform: rotate(360deg); }
+}
+
+/* Password show/hide wrapper */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+.password-wrapper input {
+    width: 100% !important;
+    padding-right: 44px !important;
+}
+
+.toggle-pass {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    font-size: 16px;
+    color: #94a3b8;
+    padding: 4px;
+    line-height: 1;
+    transition: 0.2s;
+    z-index: 10;
+    box-shadow: none !important;
+}
+
+.toggle-pass:hover {
+    transform: translateY(-50%) scale(1.15);
+    color: #cbd5e1;
+}
+
+/* Success message */
+.success-msg {
+    background: rgba(13, 148, 136, 0.1);
+    border: 1px solid rgba(13, 148, 136, 0.3);
+    color: #2dd4bf;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+/* White mode overrides for auth cards */
+body.white-mode .auth-card {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05) !important;
+}
+body.white-mode .auth-header h2 {
+    color: #0f172a;
+}
+body.white-mode .auth-card input, body.white-mode .auth-card select {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+}
+body.white-mode .auth-card input:focus, body.white-mode .auth-card select:focus {
+    border-color: var(--primary-blue) !important;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1) !important;
 }
