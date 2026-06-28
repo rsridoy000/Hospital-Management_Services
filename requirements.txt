@@ -1,0 +1,11 @@
+django>=5.0
+djangorestframework
+django-environ
+django-cors-headers
+djangorestframework-simplejwt
+drf-spectacular
+django-filter
+psycopg2-binary
+pillow
+whitenoise[brotli]
+gunicorn
