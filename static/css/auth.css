@@ -137,3 +137,46 @@ body.auth-page {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+/* Password show/hide wrapper */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    flex: 1;
+    padding-right: 50px !important;
+}
+
+.toggle-pass {
+    position: absolute;
+    right: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #94a3b8;
+    padding: 4px;
+    line-height: 1;
+    transition: 0.2s;
+    z-index: 2;
+}
+
+.toggle-pass:hover {
+    transform: scale(1.15);
+}
+
+/* Success message */
+.success-msg {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #34d399;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
